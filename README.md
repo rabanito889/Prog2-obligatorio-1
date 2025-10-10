@@ -1,0 +1,2 @@
+Hacer los try y catch.
+por ahora: Que no pongan mal el nombre (que no te pongan un int en un string y al reves)
