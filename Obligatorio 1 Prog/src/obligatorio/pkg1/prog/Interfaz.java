@@ -25,13 +25,16 @@ public class Interfaz {
             switch (opcion){
                 case "a":
                     System.out.println(sistema.getListaJugadores());
-                    sistema.setListaJugadores(registrarJugador(sistema));
+                    sistema.registrarJugador();
                     
                     break;
                 case "b":
                     Tablero tab = new Tablero();
+                    sistema.ordenarJugadores();
+                    Partida partida = new Partida();
+                    partida.empezarPartida(sistema);
+                    interfazPartida(partida);
                     
-                    tab.mostrarTableroVisual(true);
                     break;
                 case "c":
                     
@@ -46,43 +49,7 @@ public class Interfaz {
     
     
    
-    public static Jugador registrarJugador(Sistema sis) {
-        boolean ok = false;
-        
-        Scanner in = new Scanner(System.in);
-        String nombre = "";
-        int edad = 0;
-        if (sis.getListaJugadores().isEmpty()) {
-            System.out.println("Ingrese su nombre: ");
-            nombre = in.nextLine();
-            System.out.println("Ingrese edad: ");
-            edad = in.nextInt();
-        } 
-        else {
-            while (!ok) {
-                System.out.println("Ingrese su nombre: ");
-                nombre = in.nextLine();
-                
-                boolean existe = false;
-                for (Jugador jugador : sis.getListaJugadores()) {
-                    if (jugador.getNombre().equalsIgnoreCase(nombre)) {
-                        existe = true;
-                    }
-                }
-                if (existe) {
-                    System.out.println("Ese nombre ya existe. Pruebe de nuevo");
-                } 
-                else {
-                    ok = true;
-                }
-                
-            }
-            System.out.println("Ingrese edad: ");
-                edad = in.nextInt();
-        }
-        Jugador jugador = new Jugador(nombre, edad, 0, 0);
-        return jugador;
-    }
+    
     
     public static String[] leerJugada(String jugada){
         String[] movimiento = new String[3];
@@ -112,7 +79,43 @@ public class Interfaz {
             jug = "B" + orientacion;
         }
     }
-    
+    public static void interfazPartida(Partida partida){
+        Scanner in = new Scanner(System.in);
+        String opcion = "";
+        partida.setTab(new Tablero());
+        boolean si = true;
+        while(!opcion.equals("X")){
+            
+            
+            partida.getTab().mostrarTableroVisual(si);
+            System.out.println("Comienza la partida, elija su jugada: ");
+            opcion = in.nextLine().toUpperCase();
+            if(opcion.length() == 3){
+                partida.agregarJugada();
+            }
+            if(opcion.equals("H")){
+                partida.hayjugadaGanadora();
+            }
+            if(opcion.equals("B")){
+                si = true;
+            }
+            if(opcion.equals("N")){
+                si = false;
+            }
+            if(opcion.equals("T")){
+                System.out.println("Quieren empatar");
+                opcion = in.nextLine();
+                if(opcion.equalsIgnoreCase("si")){
+                    opcion = "X";
+                }
+                else{
+                    opcion = " ";
+                }
+            }
+            
+        }           
+    }
+ 
     
         
 

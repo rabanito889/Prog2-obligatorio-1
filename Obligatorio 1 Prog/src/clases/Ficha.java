@@ -37,29 +37,29 @@ public class Ficha {
         String[] dibujo = new String[3];
         if(this.color.equals("negro")){
             if(this.orientacion.equals("D")){
-                dibujo[0] = "\u25CF" + "  ";
-                dibujo[1] = "  " + "\u25CF";
-                dibujo[2] = "\u25CF" + "  ";
+                dibujo[0] = " |\u25CF" + "  ";
+                dibujo[1] = "|   " + "\u25CF" ;
+                dibujo[2] = " |\u25CF" + "  ";
             }
             else{
                 if(this.orientacion.equals("C")){
-                    dibujo[0] = "  " + "\u25CF";
-                    dibujo[1] = "\u25CF" + "  ";
-                    dibujo[2] = "  " + "\u25CF";
+                    dibujo[0] = " |  " + "\u25CF";
+                    dibujo[1] = "|\u25CF" + "   ";
+                    dibujo[2] = " |  " + "\u25CF";
                 }
             }
         }
         else{
             if(this.orientacion.equals("D")){
-                dibujo[0] = "\u25CB" + "  ";
-                dibujo[1] = "  " + "\u25CB";
-                dibujo[2] = "\u25CB" + "  ";
+                dibujo[0] = " |\u25CB" + "  ";
+                dibujo[1] = "|   " + "\u25CB";
+                dibujo[2] = " |\u25CB" + "  ";
             }
             else{
                 if(this.orientacion.equals("C")){
-                    dibujo[0] = "  " + "\u25CB";
-                    dibujo[1] = "\u25CB" + "  ";
-                    dibujo[2] = "  " + "\u25CB";
+                    dibujo[0] = " |  " + "\u25CB";
+                    dibujo[1] = "|\u25CB" + "   ";
+                    dibujo[2] = " |  " + "\u25CB";
                 }
             }
         }

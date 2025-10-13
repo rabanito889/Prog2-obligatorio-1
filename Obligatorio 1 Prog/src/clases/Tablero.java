@@ -19,10 +19,10 @@ public class Tablero {
     
     public void mostrarTableroVisual(boolean titulos){
         if(titulos){
-            System.out.print("    1       2       3      4     5      6 ");
+            System.out.print("   1    2    3    4    5    6 ");
         }
         System.out.println("");
-        System.out.println("+++++++++++++++++++");
+        System.out.println(" +----+----+----+----+----+----+");
         for(int i=0; i<3; i++){
             String[] primer = new String[6];
             String[] segundo = new String[6];
@@ -37,15 +37,33 @@ public class Tablero {
                    tercer[j] = dibujar[2];
                 }
                 else{
-                    primer[j] = "|  . ";
-                   segundo[j] = "|  . ";
-                   tercer[j] ="|  . ";
+                    primer[j] = " |   ";
+                   segundo[j] = "|    ";
+                   tercer[j] =" |   ";
                 }
             }
             for(int k = 0; k<6; k++){
                 System.out.print(primer[k]);
             }
-            System.out.println("|");
+            
+            System.out.println(" |");
+            String letra = " ";
+            if(titulos){
+                
+                if(i == 0){
+                    letra = "A";
+                }
+                else{
+                    if(i == 1){
+                        letra = "B";
+                    }
+                    else{
+                        letra = "C";
+                    }
+                }
+                
+            }
+            System.out.print(letra);
             for(int k = 0; k<6; k++){
                 System.out.print(segundo[k]);
             }
@@ -53,10 +71,11 @@ public class Tablero {
             for(int k = 0; k<6; k++){
                 System.out.print(tercer[k]);
             }
-            System.out.println("|");
-            System.out.println("++++++++++++++++++++++");
+            System.out.println(" |");
+            System.out.println(" +----+----+----+----+----+----+");
             
         }
+        
         
     }
 }
