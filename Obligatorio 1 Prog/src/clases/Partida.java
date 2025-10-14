@@ -6,7 +6,10 @@ import java.util.Scanner;
 
 public class Partida {
     private Tablero tab;
-
+    private Jugador jugadorBlanco;
+    private Jugador jugadorNegro;
+    private Jugador jugadorEnTurno;
+    
     public Tablero getTab() {
         return tab;
     }
@@ -14,10 +17,6 @@ public class Partida {
     public void setTab(Tablero tab) {
         this.tab = tab;
     }
-    private Jugador jugadorBlanco;
-    private Jugador jugadorNegro;
-    private Jugador jugadorEnTurno;
-
     public Jugador getJugadorBlanco() {
         return jugadorBlanco;
     }
@@ -76,6 +75,62 @@ public class Partida {
         
         System.out.println("Ingrese su jugada:  ");
     }
+    public void agregarJugada(String jugada, Boolean blanco, Tablero tab){
+        int fila = -1;
+        if((jugada.charAt(0)+"").equalsIgnoreCase("A")){
+            fila = 0;
+        }
+        if((jugada.charAt(0)+"").equalsIgnoreCase("B")){
+            fila = 1;
+        }
+        if((jugada.charAt(0)+"").equalsIgnoreCase("C")){
+            fila = 2;
+        }
+        
+        int columna = -1;
+        for(int i = 1; i<7; i++){
+            String num = i +"";
+            if(num.equals(jugada.charAt(1)+"")){
+                columna = i-1;
+            }
+        }
+        Scanner in = new Scanner(System.in);
+        while(columna == -1  || fila == -1){
+            System.out.println("Jugada Incorrecta. Reeingrese");
+            jugada = in.nextLine();
+            
+            if((jugada.charAt(0)+"").equalsIgnoreCase("A")){
+            fila = 0;
+            }
+            if((jugada.charAt(0)+"").equalsIgnoreCase("B")){
+            fila = 1;
+            }
+            if((jugada.charAt(0)+"").equalsIgnoreCase("C")){
+            fila = 2;
+            }
+        
+            
+            for(int i = 1; i<7; i++){
+                String num = i +"";
+                if(num.equals(jugada.charAt(1)+"")){
+                columna = i-1;
+                }
+            }
+       
+        }   
+        String orientacion = jugada.charAt(2) +"";
+        String color = "negro";
+        if(blanco){
+            color = "blanco";
+        }
+        if(!(columna == -1 || fila == -1)){
+            Ficha f = new Ficha(color, orientacion);
+            tab.getTab()[fila][columna] = f;
+        }
+       
+    }
+
+    
     
         
     

@@ -29,7 +29,7 @@ public class Interfaz {
                     
                     break;
                 case "b":
-                    Tablero tab = new Tablero();
+                    
                     sistema.ordenarJugadores();
                     Partida partida = new Partida();
                     partida.empezarPartida(sistema);
@@ -51,47 +51,27 @@ public class Interfaz {
    
     
     
-    public static String[] leerJugada(String jugada){
-        String[] movimiento = new String[3];
-        if((jugada.charAt(0)+"").equalsIgnoreCase("A")){
-            movimiento[0] = "1";
-        }
-        if((jugada.charAt(0)+"").equalsIgnoreCase("B")){
-            movimiento[0] = "2";
-        }
-        if((jugada.charAt(0)+"").equalsIgnoreCase("C")){
-            movimiento[0] = "3";
-        }
-        movimiento[1] = jugada.charAt(1)+"";
-        movimiento[2] = jugada.charAt(2)+"";
-        return movimiento;
-    }
-    public static void agregarFicha(String[] mov){
-        String fila = mov[0];
-        String columna = mov[1];
-        String orientacion = mov[2];
-        Partida.jugadorEnTurno();
-        String jug = "";
-        if(jugadorEnTurno.equals("negro")){
-            jug ="N" + orientacion;
-        }
-        else{
-            jug = "B" + orientacion;
-        }
-    }
+    
     public static void interfazPartida(Partida partida){
         Scanner in = new Scanner(System.in);
         String opcion = "";
         partida.setTab(new Tablero());
         boolean si = true;
+        boolean blanco = true;
         while(!opcion.equals("X")){
             
             
             partida.getTab().mostrarTableroVisual(si);
-            System.out.println("Comienza la partida, elija su jugada: ");
+            System.out.println(" elija su jugada: ");
             opcion = in.nextLine().toUpperCase();
             if(opcion.length() == 3){
-                partida.agregarJugada();
+                partida.agregarJugada(opcion, blanco, partida.getTab());
+                if(blanco){
+                    blanco = false;
+                }
+                else{
+                    blanco = true;
+                }
             }
             if(opcion.equals("H")){
                 partida.hayjugadaGanadora();

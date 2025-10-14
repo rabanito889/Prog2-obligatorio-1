@@ -36,30 +36,40 @@ public class Ficha {
     public String[] dibujarPieza(){
         String[] dibujo = new String[3];
         if(this.color.equals("negro")){
-            if(this.orientacion.equals("D")){
+            if(this.orientacion.equalsIgnoreCase("D")){
                 dibujo[0] = " |\u25CF" + "  ";
                 dibujo[1] = "|   " + "\u25CF" ;
                 dibujo[2] = " |\u25CF" + "  ";
             }
             else{
-                if(this.orientacion.equals("C")){
+                if(this.orientacion.equalsIgnoreCase("C")){
                     dibujo[0] = " |  " + "\u25CF";
                     dibujo[1] = "|\u25CF" + "   ";
                     dibujo[2] = " |  " + "\u25CF";
                 }
+                else{
+                    dibujo[0] = " |   ";
+                    dibujo[1] = "|    ";
+                    dibujo[2] = " |   ";
+                }
             }
         }
         else{
-            if(this.orientacion.equals("D")){
+            if(this.orientacion.equalsIgnoreCase("D")){
                 dibujo[0] = " |\u25CB" + "  ";
                 dibujo[1] = "|   " + "\u25CB";
                 dibujo[2] = " |\u25CB" + "  ";
             }
             else{
-                if(this.orientacion.equals("C")){
+                if(this.orientacion.equalsIgnoreCase("C")){
                     dibujo[0] = " |  " + "\u25CB";
                     dibujo[1] = "|\u25CB" + "   ";
                     dibujo[2] = " |  " + "\u25CB";
+                }
+                else{
+                    dibujo[0] = " |   ";
+                    dibujo[1] = "|    ";
+                    dibujo[2] = " |   ";
                 }
             }
         }
