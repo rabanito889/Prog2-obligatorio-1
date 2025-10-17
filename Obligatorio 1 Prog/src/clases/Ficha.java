@@ -37,15 +37,15 @@ public class Ficha {
         String[] dibujo = new String[3];
         if(this.color.equals("negro")){
             if(this.orientacion.equalsIgnoreCase("D")){
-                dibujo[0] = " |\u25CF" + "  ";
-                dibujo[1] = "|   " + "\u25CF" ;
-                dibujo[2] = " |\u25CF" + "  ";
+                dibujo[0] = " |●" + "  ";
+                dibujo[1] = "|   " + "●";
+                dibujo[2] = " |●" + "  ";
             }
             else{
                 if(this.orientacion.equalsIgnoreCase("C")){
-                    dibujo[0] = " |  " + "\u25CF";
-                    dibujo[1] = "|\u25CF" + "   ";
-                    dibujo[2] = " |  " + "\u25CF";
+                    dibujo[0] = " |  " + "●";
+                    dibujo[1] = "|●" + "   ";
+                    dibujo[2] = " |  " + "●";
                 }
                 else{
                     dibujo[0] = " |   ";
@@ -56,15 +56,15 @@ public class Ficha {
         }
         else{
             if(this.orientacion.equalsIgnoreCase("D")){
-                dibujo[0] = " |\u25CB" + "  ";
-                dibujo[1] = "|   " + "\u25CB";
-                dibujo[2] = " |\u25CB" + "  ";
+                dibujo[0] = " |○" + "  ";
+                dibujo[1] = "|   " + "○";
+                dibujo[2] = " |○" + "  ";
             }
             else{
                 if(this.orientacion.equalsIgnoreCase("C")){
-                    dibujo[0] = " |  " + "\u25CB";
-                    dibujo[1] = "|\u25CB" + "   ";
-                    dibujo[2] = " |  " + "\u25CB";
+                    dibujo[0] = " |  " + "○";
+                    dibujo[1] = "|○" + "   ";
+                    dibujo[2] = " |  " + "○";
                 }
                 else{
                     dibujo[0] = " |   ";
@@ -72,6 +72,20 @@ public class Ficha {
                     dibujo[2] = " |   ";
                 }
             }
+        }
+        return dibujo;
+    }
+    public String[] dibujarPiezaGanadora(String letraGanadora){
+        String[] dibujo = new String[3];
+        if(letraGanadora.equals("X")){
+            dibujo[0] = " |X" + "XX";
+            dibujo[1] = "| XX" + "X";
+            dibujo[2] = " |X" + "XX";
+        }
+        else{
+            dibujo[0] = " |O" + "OO";
+            dibujo[1] = "| OO" + "O";
+            dibujo[2] = " |O" + "OO";
         }
         return dibujo;
     }

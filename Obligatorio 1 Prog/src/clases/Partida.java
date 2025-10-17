@@ -76,62 +76,82 @@ public class Partida {
         System.out.println("Ingrese su jugada:  ");
     }
     public void agregarJugada(String jugada, Boolean blanco, Tablero tab){
-        int fila = -1;
-        if((jugada.charAt(0)+"").equalsIgnoreCase("A")){
-            fila = 0;
-        }
-        if((jugada.charAt(0)+"").equalsIgnoreCase("B")){
-            fila = 1;
-        }
-        if((jugada.charAt(0)+"").equalsIgnoreCase("C")){
-            fila = 2;
-        }
         
-        int columna = -1;
-        for(int i = 1; i<7; i++){
-            String num = i +"";
-            if(num.equals(jugada.charAt(1)+"")){
-                columna = i-1;
-            }
-        }
         Scanner in = new Scanner(System.in);
-        while(columna == -1  || fila == -1){
-            System.out.println("Jugada Incorrecta. Reeingrese");
-            jugada = in.nextLine();
-            
-            if((jugada.charAt(0)+"").equalsIgnoreCase("A")){
-            fila = 0;
-            }
-            if((jugada.charAt(0)+"").equalsIgnoreCase("B")){
-            fila = 1;
-            }
-            if((jugada.charAt(0)+"").equalsIgnoreCase("C")){
-            fila = 2;
-            }
+        boolean jugadaValida = false;
         
-            
-            for(int i = 1; i<7; i++){
-                String num = i +"";
-                if(num.equals(jugada.charAt(1)+"")){
-                columna = i-1;
-                }
-            }
-       
-        }   
-        String orientacion = jugada.charAt(2) +"";
         String color = "negro";
         if(blanco){
             color = "blanco";
         }
-        if(!(columna == -1 || fila == -1)){
-            Ficha f = new Ficha(color, orientacion);
-            tab.getTab()[fila][columna] = f;
-        }
-       
-    }
 
-    
-    
         
-    
+        while(!jugadaValida){
+            
+            int fila = -1;
+            if((jugada.charAt(0)+"").equalsIgnoreCase("A")){
+                fila = 0;
+            }
+            if((jugada.charAt(0)+"").equalsIgnoreCase("B")){
+                fila = 1;
+            }
+            if((jugada.charAt(0)+"").equalsIgnoreCase("C")){
+                fila = 2;
+            }
+
+            int columna = -1;
+            for(int i = 1; i<7; i++){
+                String num = i +"";
+                if(num.equals(jugada.charAt(1)+"")){
+                    columna = i-1;
+                }
+            }
+
+                for(int i = 1; i<7; i++){
+                    String num = i +"";
+                    if(num.equals(jugada.charAt(1)+"")){
+                    columna = i-1;
+                    }
+                }
+
+            
+            if((columna == -1 || fila == -1)){
+                System.out.println("Jugada incorrecta (REINGRESE):");
+                jugada = in.nextLine();
+            }else{
+                if((jugada.charAt(2)+"").equalsIgnoreCase("I")){
+                    Ficha fichaActual = tab.getTab()[fila][columna];
+
+                    if(fichaActual == null){
+                        System.out.println("No hay una ficha para invertir en esa posicion (REINGRESE):");
+                        jugada = in.nextLine();
+                    }else{
+                        if(fichaActual.getColor().equalsIgnoreCase(color)){
+                            if(fichaActual.getOrientacion().equalsIgnoreCase("D")){
+                                fichaActual.setOrientacion("C");
+                            }else{
+                                fichaActual.setOrientacion("D");
+                            }
+                            jugadaValida = true;
+                        }else{
+                            System.out.println("No puede invertir fichas de su rival(REINGRESE):");
+                            jugada = in.nextLine();     
+                        }
+                    }
+                }else{
+                    if(tab.getTab()[fila][columna] == null){
+                        Ficha f = new Ficha(color, jugada.charAt(2) +"");
+                        tab.getTab()[fila][columna] = f;
+                        jugadaValida = true;
+                    }else{
+                        System.out.println("Ese lugar ya está ocupado (REINGRESE):");
+                        jugada = in.nextLine();
+                    }
+
+                }
+
+                
+            }
+        }
+    }
 }

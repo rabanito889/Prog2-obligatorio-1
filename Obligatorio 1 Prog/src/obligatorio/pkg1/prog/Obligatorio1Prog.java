@@ -27,7 +27,7 @@ public class Obligatorio1Prog {
        Jugador j1 = new Jugador("juan",18,0,0);
        Jugador j2 = new Jugador("rodri",18,0,0);
        Jugador j3 = new Jugador("pedro",18,0,0);
-       Jugador j4 = new Jugador("ana",18,0,0);
+       Jugador j4 = new Jugador("Agustin",18,0,0);
        Jugador j5 = new Jugador("jose",18,0,0);
        sistema.AgregarListaJugadores(j3);
        sistema.AgregarListaJugadores(j2);

@@ -58,14 +58,29 @@ public class Interfaz {
         partida.setTab(new Tablero());
         boolean si = true;
         boolean blanco = true;
-        while(!opcion.equals("X")){
+        boolean gano = false;
+        while(!opcion.equals("X") && !gano){
             
-            
-            partida.getTab().mostrarTableroVisual(si);
-            System.out.println(" elija su jugada: ");
+            String[][] s = new String[3][6];
+            partida.getTab().mostrarTableroVisual(si,s);
+            if(blanco){
+                System.out.println(" elija su jugada(TURNO BLANCO): ");
+            }else{
+                System.out.println(" elija su jugada(TURNO NEGRO): ");
+            }
             opcion = in.nextLine().toUpperCase();
             if(opcion.length() == 3){
                 partida.agregarJugada(opcion, blanco, partida.getTab());
+                if(partida.getTab().verSiGanan(blanco)){
+                   
+                   if(blanco){ 
+                    System.out.println("Gano blanco!!!!");
+                   }
+                   else{
+                       System.out.println("Gano Negro!!!");
+                   }
+                    gano = true;
+                }
                 if(blanco){
                     blanco = false;
                 }
