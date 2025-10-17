@@ -154,4 +154,25 @@ public class Partida {
             }
         }
     }
+    public void continuarPartida(Sistema sis, Tablero tab){
+        empezarPartida(sis);
+        this.setTab(tab);
+        boolean blanco = true;
+        Scanner in = new Scanner(System.in);
+        String jugada = in.nextLine();
+        for(int i=0; i<jugada.length()-2; i++){
+            if(((jugada.charAt(i)+"").equalsIgnoreCase("A") || (jugada.charAt(i)+"").equalsIgnoreCase("B") || 
+                    (jugada.charAt(i)+"").equalsIgnoreCase("C")) && ((jugada.charAt(i+1)+"").equals("1") || (jugada.charAt(i+1)+"").equals("2") ||
+                    (jugada.charAt(i+1)+"").equals("3") || (jugada.charAt(i+1)+"").equals("4") || (jugada.charAt(i+1)+"").equals("5") || (jugada.charAt(i+1)+"").equals("6"))) {
+                String unaJugada = jugada.charAt(i)+""+jugada.charAt(i+1)+jugada.charAt(i+2);
+                agregarJugada(unaJugada,blanco,this.tab);
+                if(blanco){
+                    blanco = false;
+                }
+                else{
+                    blanco = true;
+                }
+            }
+        }
+    }
 }

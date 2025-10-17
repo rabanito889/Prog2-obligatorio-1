@@ -3,7 +3,7 @@ package clases;
 
 
 public class Tablero {
-    private Ficha[][] tab = new Ficha[3][5];
+    private Ficha[][] tab = new Ficha[3][6];
 
     public Ficha[][] getTab() {
         return tab;
@@ -21,14 +21,15 @@ public class Tablero {
         if(titulos){
             System.out.print("   1    2    3    4    5    6 ");
         }
+        //Hacemos print y println para acomodar
         System.out.println("");
         System.out.println(" +----+----+----+----+----+----+");
         for(int i=0; i<3; i++){
+            //Armamos cadenas de Strings para guardar los caracteres, 3 strings por fila
             String[] primer = new String[6];
             String[] segundo = new String[6];
             String[] tercer = new String[6];
             for(int j = 0; j<6; j++){
-                
                 Ficha ficha = tab[i][j];
                 if(ficha != null){
                     if(letrasG[i][j] != null && !letrasG[i][j].equals(" ")){
@@ -36,7 +37,6 @@ public class Tablero {
                         primer[j] = " | "+letra+letra;
                         segundo[j] = "| "+letra+letra+" ";
                         tercer[j] = " | "+letra+letra;
-                          
                     }
                     else{
                         String[] dibujar = ficha.dibujarPieza();
@@ -46,21 +46,17 @@ public class Tablero {
                     }
                 }
                 else{
-                    
-                       primer[j] = " |   ";
-                       segundo[j] = "|    ";
-                       tercer[j] =" |   ";
-                    
+                    primer[j] = " |   ";
+                    segundo[j] = "|    ";
+                    tercer[j] =" |   ";
                 }
             }
             for(int k = 0; k<6; k++){
                 System.out.print(primer[k]);
             }
-            
             System.out.println(" |");
             String letra = " ";
             if(titulos){
-                
                 if(i == 0){
                     letra = "A";
                 }
@@ -72,7 +68,6 @@ public class Tablero {
                         letra = "C";
                     }
                 }
-                
             }
             System.out.print(letra);
             for(int k = 0; k<6; k++){
@@ -91,7 +86,7 @@ public class Tablero {
     }
     
     
-    public boolean verSiGanan(boolean blanco){
+    public boolean verSiGanan(boolean titulos){
         String[][] aux = new String[3][5];
         Ficha[][] tab = this.getTab();
         String [][] letraG = new String[3][6];
@@ -101,8 +96,6 @@ public class Tablero {
                 aux[i][j] = " ";
             }
         }
-        
-        
         for(int i = 0; i<3; i++){
             for(int j = 0; j<5; j++){
                 if(tab[i][j] != null && tab[i][j+1]!= null ){    
@@ -113,40 +106,25 @@ public class Tablero {
                         aux[i][j] = "O";
                         }
                     }
+                }
             }
-            }
-                    
-                    
-                
-                
-                
-            }
-            
-        
-        
+        }
         //La recorremos y vemos si hay 3 alineados
         boolean hayG = false;
-        
-        
-        
         //filas
-        
             for(int i = 0; i<3 && !hayG; i++){
-            
                if(!aux[i][0].equals(" ") && aux[i][0].equals(aux[i][2]) && aux[i][0].equals(aux[i][4])){
                    hayG = true;
-                   
+                   //guardamos las posiciones
                    letraG[i][0] = aux[i][0];
                    letraG[i][1] = aux[i][0];
                    letraG[i][2] = aux[i][0];
                    letraG[i][3] = aux[i][0];
                    letraG[i][4] = aux[i][0];
                    letraG[i][5] = aux[i][0];
-               
-            }
+                }
             }
             //columnas
-            
             for(int j = 0; j<5 && !hayG; j++){
                 if(!aux[0][j].equals(" ") && aux[0][j].equals(aux[1][j]) && aux[0][j].equals(aux[2][j])){
                     hayG = true;
@@ -156,7 +134,6 @@ public class Tablero {
                     letraG[0][j+1] = aux[0][j];
                     letraG[1][j+1] = aux[0][j];
                     letraG[2][j+1] = aux[0][j];
-                    
                 }
             }
             //Diagonales
@@ -170,35 +147,34 @@ public class Tablero {
                    letraG[0][j+1] = aux[0][j];
                    letraG[1][j+2] = aux[0][j];
                    letraG[2][j+3] = aux[0][j];
-                   
                }
             }
 
             for(int j = 4; j>1 && !hayG; j--){
                if(!aux[0][j].equals(" ") && aux[0][j].equals(aux[1][j-1]) && aux[0][j].equals(aux[2][j-2])){
                    hayG = true;
-                   
                    letraG[0][j+1] = aux[0][j];
                    letraG[1][j] = aux[0][j];
                    letraG[2][j-1] = aux[0][j];
                    letraG[0][j] = aux[0][j];
                    letraG[1][j-1] = aux[0][j];
                    letraG[2][j-2] = aux[0][j];
-                   
                }
             }
-            
-            System.out.println(aux);
-            for (int i = 0; i < letraG.length; i++) {
-                for (int j = 0; j < letraG[0].length; j++) {
-                    System.out.print(letraG[i][j]);
-                }
-        }
-            
-            mostrarTableroVisual(blanco, letraG);
-        
+        //Mostramos el tablero visual y mandamos la lista
+        mostrarTableroVisual(titulos, letraG);
         return hayG;
     }
-    
+    public boolean lleno(){
+        boolean lleno = true;
+        for (int i = 0; i < tab.length; i++) {
+            for (int j = 0; j<tab[0].length; j++) {
+                if(tab[i][j] == null){
+                    lleno = false;
+                }
+            }
+        }
+        return lleno;
+    }
     
 }
